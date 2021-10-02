@@ -3,7 +3,14 @@
 //import "tfplan/v3" as tfplan
 import "tfplan/v2" as tfplan
 
-allComputeInstances = tfplan.find_resources("google_compute_instance")
+//allComputeInstances = tfplan.find_resources("google_compute_instance")
+
+allComputeInstances = filter tfplan.resource_changes as _, resource_changes {
+	resource_changes.type is "google_compute_instance" and
+		resource_changes.mode is "managed" and
+		(resource_changes.change.actions contains "create" or
+			resource_changes.change.actions is ["update"])
+}
 
 status = true
 
