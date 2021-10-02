@@ -1,5 +1,6 @@
 //Restrict Public IP address for compute VM instance
-import "tfplan-functions" as tfplan
+//import "tfplan-functions" as tfplan
+import "tfplan/v3" as tfplan
 
 allComputeInstances = tfplan.find_resources("google_compute_instance")
 
