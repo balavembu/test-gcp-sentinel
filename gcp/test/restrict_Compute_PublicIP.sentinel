@@ -17,7 +17,7 @@ for allComputeInstances as _, rc {
 	if (rc.change.after contains "network_interface")	{
 			print("RC Change After", rc.change.after)
             print("After Network Interface", rc.change.after.network_interface)
-            print("Something like network may be : " rc.change.after.network_interface.network)
+            print("Something like network may be : ", rc.change.after.network_interface.network)
             print("Main Block for access_config[0] : ", rc.change.after.network_interface[0])
 		if (rc.change.after.network_interface not in [null, []] and rc.change.after.network_interface[0] contains "access_config") {
 			status = false
