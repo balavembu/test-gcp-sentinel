@@ -15,12 +15,9 @@ allComputeInstances = filter tfplan.resource_changes as _, resource_changes {
 status = true
 
 for allComputeInstances as _, rc {
-	if (rc.change.after contains "network_interface")	{
-			print("Yes - Network Interface Present")
-			if (rc.change.after.network_interface contains "access_config") {
+	if (rc.change.after contains "access_config")	{
 			status = false
 			print ("Policy Validation - Restricting Public IP Access for Compute Instance")    
-		}	
 	}
 }
 
