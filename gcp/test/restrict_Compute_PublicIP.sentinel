@@ -22,6 +22,7 @@ for allComputeInstances as _, rc {
 			if ((rc.change.after.network_interface contains "access_config") {
 			status = false
 			print ("Policy Validation - Restricting Public IP Access for Compute Instance")    
+			}
 		}	
 	}
 }
