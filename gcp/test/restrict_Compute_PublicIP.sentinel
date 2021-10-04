@@ -15,8 +15,8 @@ allComputeInstances = filter tfplan.resource_changes as _, resource_changes {
 status = true
 for allComputeInstances as _, rc {
 	if (rc.change.after contains "network_interface")	{
-			print("RC Change After # ", rc.change.after, "After Network Interface # ", rc.change.after.network_interface, "ACS_CONFIG[0] # ", rc.change.after.network_interface[0])
-		if (rc.change.after.network_interface not in [null, []] and rc.change.after.network_interface[0] contains "access_config") {
+			//print("RC Change After # ", rc.change.after, "After Network Interface # ", rc.change.after.network_interface, "ACS_CONFIG[0] # ", rc.change.after.network_interface[0])
+		if (rc.change.after.network_interface[0] contains "access_config") {
 			status = false
 			print ("Policy Validation Failure - Restricting Public IP Access for Compute Instance")    
 		}	
