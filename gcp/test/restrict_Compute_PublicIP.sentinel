@@ -16,12 +16,10 @@ status = true
 for allComputeInstances as _, rc {
 	if (rc.change.after contains "network_interface")	{
 			print("Yes - Network Interface Present", rc.change.after)
-		if (rc.change.after.network_interface not in [null, []] and rc.change.after.network_interface[0] contains "network") {
-			print("Yes - NETWORK Present", rc.change.after.network_interface[0], rc.change.after.network_interface[1], rc.change.after.network_interface[2], rc.change.after.network_interface[3], rc.change.after.network_interface[4])
-			if (rc.change.after.network_interface[4] contains "access_config") {
+		if (rc.change.after.network_interface not in [null, []] and rc.change.after.network_interface[0] contains "access_config") {
+			print("Yes - NETWORK Present")
 			status = false
 			print ("Policy Validation - Restricting Public IP Access for Compute Instance")    
-			}
 		}	
 	}
 }
