@@ -19,7 +19,7 @@ for allComputeInstances as _, rc {
 			print("Yes - Network Interface Present")
 		if (rc.change.after.network_interface contains "network") {
 			print("Yes - NETWORK Present")
-			if ((rc.change.after.network_interface contains "access_config") {
+			if (rc.change.after.network contains "access_config") {
 			status = false
 			print ("Policy Validation - Restricting Public IP Access for Compute Instance")    
 			}
