@@ -1,0 +1,26 @@
+import "tfplan-functions" as plan
+
+allComputeInstanceResources = plan.find_resources ("google_compute_instance")
+
+violatingResources = {}
+for allComputeInstanceResources as addr, rc {
+  if (rc.change.after contains "network_interface" and rc.change.after.network_interface not in [[], null]){
+    for rc.change.after.network_interface as _, ni { // This block can be repeated multiple times 
+
+      for ni.access_config as _, publicAccessBlock {   //This block can be repeated multiple times
+
+        if (publicAccessBlock is not []){
+
+          violatingResources[addr] = rc
+          print("Violation : Resource ",rc.address, " is assigned with external IP")
+        }  
+      } 
+    }
+  }
+}
+
+print("Policy Validation Rule : Compute instance resources must not be assigned with external IP")
+
+main = rule {
+  length(violatingResources) == 0
+}
